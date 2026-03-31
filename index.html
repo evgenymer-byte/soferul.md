@@ -21,296 +21,116 @@
       --border: rgba(255,255,255,0.07);
       --radius: 16px;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 100px; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding-bottom: 100px;
-    }
+    /* Header */
+    .header { background: linear-gradient(135deg, #1a0a0a 0%, #0f0f13 60%, #0a0a1a 100%); padding: 20px 20px 24px; position: relative; overflow: hidden; }
+    .header::before { content:''; position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle, rgba(230,57,70,0.2) 0%, transparent 70%); }
+    .header-row { display:flex; align-items:center; gap:12px; }
+    .logo { width:48px; height:48px; background:linear-gradient(135deg, var(--accent), var(--accent2)); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; box-shadow:0 4px 20px rgba(230,57,70,0.4); }
+    .header-title { font-size:22px; font-weight:800; }
+    .header-title span { color:var(--accent); }
+    .header-sub { color:var(--muted); font-size:12px; margin-top:2px; }
+    .live-badge { display:flex; align-items:center; gap:6px; background:rgba(46,204,113,0.15); border:1px solid rgba(46,204,113,0.3); border-radius:20px; padding:4px 10px; font-size:11px; font-weight:600; color:var(--green); margin-left:auto; }
+    .live-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 1.4s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
 
-    /* ── Header ── */
-    .header {
-      background: linear-gradient(135deg, #1a0a0a 0%, #0f0f13 60%, #0a0a1a 100%);
-      padding: 20px 20px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(230,57,70,0.2) 0%, transparent 70%);
-    }
-    .header-row { display: flex; align-items: center; gap: 12px; }
-    .logo {
-      width: 48px; height: 48px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 4px 20px rgba(230,57,70,0.4);
-    }
-    .header-title { font-size: 22px; font-weight: 800; }
-    .header-title span { color: var(--accent); }
-    .header-sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
-    .live-badge {
-      display: flex; align-items: center; gap: 6px;
-      background: rgba(46,204,113,0.15);
-      border: 1px solid rgba(46,204,113,0.3);
-      border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 11px; font-weight: 600; color: var(--green);
-      margin-left: auto;
-    }
-    .live-dot {
-      width: 6px; height: 6px;
-      background: var(--green); border-radius: 50%;
-      animation: pulse 1.4s infinite;
-    }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    /* Tabs */
+    .tabs { display:flex; padding:16px 16px 0; gap:8px; overflow-x:auto; scrollbar-width:none; }
+    .tabs::-webkit-scrollbar { display:none; }
+    .tab { flex-shrink:0; padding:8px 18px; border-radius:30px; border:1px solid var(--border); background:var(--surface); color:var(--muted); font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+    .tab.active { background:var(--accent); border-color:var(--accent); color:white; box-shadow:0 4px 16px rgba(230,57,70,0.35); }
 
-    /* ── Tabs ── */
-    .tabs {
-      display: flex;
-      padding: 16px 16px 0;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .tabs::-webkit-scrollbar { display: none; }
-    .tab {
-      flex-shrink: 0;
-      padding: 8px 18px;
-      border-radius: 30px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-size: 13px; font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .tab.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-      box-shadow: 0 4px 16px rgba(230,57,70,0.35);
-    }
+    /* Section */
+    .section { display:none; padding:16px; animation:fadeIn 0.3s ease; }
+    .section.active { display:block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
 
-    /* ── Section ── */
-    .section { display: none; padding: 16px; animation: fadeIn 0.3s ease; }
-    .section.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    /* Fuel */
+    .fuel-header { background:linear-gradient(135deg, var(--surface), var(--surface2)); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:12px; position:relative; overflow:hidden; }
+    .fuel-header::after { content:'⛽️'; position:absolute; right:20px; top:50%; transform:translateY(-50%); font-size:48px; opacity:0.08; }
+    .fuel-label { color:var(--muted); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+    .fuel-date { color:var(--text); font-size:13px; font-weight:600; }
+    .fuel-updated { color:var(--muted); font-size:11px; margin-top:4px; }
+    .fuel-warning { display:flex; align-items:center; gap:8px; background:rgba(244,162,97,0.12); border:1px solid rgba(244,162,97,0.25); border-radius:10px; padding:10px 14px; font-size:12px; color:var(--gold); margin-bottom:12px; }
 
-    /* ── Fuel Card ── */
-    .fuel-header {
-      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 12px;
-      position: relative;
-      overflow: hidden;
-    }
-    .fuel-header::after {
-      content: '⛽️';
-      position: absolute;
-      right: 20px; top: 50%;
-      transform: translateY(-50%);
-      font-size: 48px;
-      opacity: 0.08;
-    }
-    .fuel-label { color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-    .fuel-date { color: var(--text); font-size: 13px; font-weight: 500; }
-    .fuel-warning {
-      display: flex; align-items: center; gap: 8px;
-      background: rgba(244,162,97,0.12);
-      border: 1px solid rgba(244,162,97,0.25);
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: 12px;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
+    .fuel-row { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 20px; display:flex; align-items:center; margin-bottom:10px; transition:transform 0.15s; }
+    .fuel-row:active { transform:scale(0.98); }
+    .fuel-icon { font-size:28px; margin-right:16px; }
+    .fuel-info { flex:1; }
+    .fuel-type { font-size:15px; font-weight:700; }
+    .fuel-desc { font-size:12px; color:var(--muted); margin-top:2px; }
+    .fuel-price { text-align:right; }
+    .fuel-price-value { font-size:22px; font-weight:800; }
+    .fuel-price-value.up { color:#ff4757; }
+    .fuel-price-value.ok { color:var(--green); }
+    .fuel-currency { font-size:14px; font-weight:600; color:var(--muted); }
+    .fuel-price-change { font-size:11px; color:var(--muted); }
+    .fuel-price-change.up { color:#ff4757; }
+    .skeleton { background:linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; border-radius:6px; display:inline-block; }
+    @keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
 
-    .fuel-row {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      transition: transform 0.15s;
-    }
-    .fuel-row:active { transform: scale(0.98); }
-    .fuel-icon { font-size: 28px; margin-right: 16px; }
-    .fuel-info { flex: 1; }
-    .fuel-type { font-size: 15px; font-weight: 700; }
-    .fuel-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .fuel-price { text-align: right; }
-    .fuel-price-value { font-size: 22px; font-weight: 800; }
-    .fuel-price-value.up { color: #ff4757; }
-    .fuel-price-value.ok { color: var(--green); }
-    .fuel-price-change { font-size: 11px; color: var(--muted); }
-    .fuel-price-change.up { color: #ff4757; }
+    /* Tank Calculator */
+    .tank-calc { background:linear-gradient(135deg, rgba(230,57,70,0.08), rgba(255,107,53,0.04)); border:1px solid rgba(230,57,70,0.2); border-radius:var(--radius); padding:18px; margin-top:4px; }
+    .tank-calc-title { font-size:14px; font-weight:700; margin-bottom:14px; }
+    .slider-section { margin-bottom:14px; }
+    .slider-label { display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted); margin-bottom:8px; }
+    .slider-value { font-size:15px; font-weight:800; color:var(--text); }
+    .slider { -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:3px; background:var(--surface2); outline:none; }
+    .slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background:var(--accent); cursor:pointer; box-shadow:0 2px 8px rgba(230,57,70,0.5); }
+    .slider::-moz-range-thumb { width:22px; height:22px; border-radius:50%; background:var(--accent); cursor:pointer; border:none; }
+    .tank-result { background:var(--surface); border-radius:12px; padding:14px; margin-top:4px; }
+    .tank-row { display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:8px; }
+    .tank-row strong { color:var(--text); }
+    .tank-divider { height:1px; background:var(--border); margin:10px 0; }
+    .tank-total { display:flex; justify-content:space-between; font-size:16px; font-weight:800; }
+    .tank-total .price { color:var(--accent); }
+    .tank-vs2020 { display:flex; justify-content:space-between; font-size:12px; margin-top:8px; color:var(--muted); }
+    .tank-vs2020 .saving { color:#ff4757; font-weight:700; }
 
-    .tank-calc {
-      background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(255,107,53,0.05));
-      border: 1px solid rgba(230,57,70,0.2);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-top: 4px;
-    }
-    .tank-calc-title { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
-    .tank-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
-    .tank-row strong { color: var(--text); }
-    .tank-divider { height: 1px; background: var(--border); margin: 10px 0; }
-    .tank-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; }
-    .tank-total .price { color: var(--accent); }
+    /* Masters */
+    .section-title { font-size:13px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 10px; }
+    .section-title:first-child { margin-top:0; }
+    .master-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin-bottom:10px; display:flex; align-items:flex-start; gap:14px; transition:all 0.2s; }
+    .master-card:active { transform:scale(0.98); background:var(--surface2); }
+    .master-avatar { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+    .master-info { flex:1; }
+    .master-name { font-size:15px; font-weight:700; color:var(--text); }
+    .master-spec { font-size:12px; color:var(--muted); margin-top:3px; }
+    .master-meta { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+    .badge { padding:3px 8px; border-radius:6px; font-size:11px; font-weight:600; }
+    .badge-phone { background:rgba(46,204,113,0.15); color:var(--green); }
+    .badge-addr { background:rgba(255,255,255,0.06); color:var(--muted); }
+    .call-btn { background:var(--green); color:white; border:none; border-radius:10px; padding:8px 14px; font-size:12px; font-weight:700; cursor:pointer; flex-shrink:0; transition:all 0.2s; }
+    .call-btn:active { transform:scale(0.95); }
 
-    /* ── Masters ── */
-    .section-title {
-      font-size: 13px; font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 16px 0 10px;
-    }
-    .section-title:first-child { margin-top: 0; }
+    /* Cars */
+    .car-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:12px; overflow:hidden; transition:all 0.2s; }
+    .car-card:active { transform:scale(0.99); }
+    .car-card-body { padding:14px 16px; }
+    .car-card-top { display:flex; justify-content:space-between; align-items:flex-start; }
+    .car-name { font-size:16px; font-weight:700; }
+    .car-year { font-size:12px; color:var(--muted); margin-top:2px; }
+    .car-price { font-size:20px; font-weight:800; color:var(--gold); }
+    .car-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+    .car-tag { padding:4px 10px; border-radius:8px; background:var(--surface2); font-size:11px; color:var(--muted); font-weight:500; }
+    .car-verdict { background:rgba(46,204,113,0.08); border-left:3px solid var(--green); padding:8px 12px; margin:10px 0 0; font-size:12px; color:var(--green); border-radius:0 8px 8px 0; }
+    .car-action { display:flex; border-top:1px solid var(--border); }
+    .car-action-btn { flex:1; padding:12px; background:none; border:none; color:var(--accent); font-size:13px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+    .car-action-btn:first-child { border-right:1px solid var(--border); }
+    .car-action-btn:active { background:rgba(230,57,70,0.1); }
+    .cars-updated { text-align:center; font-size:11px; color:var(--muted); margin-bottom:12px; }
 
-    .master-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-    .master-card:active { transform: scale(0.98); background: var(--surface2); }
-    .master-avatar {
-      width: 44px; height: 44px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
-    }
-    .master-info { flex: 1; }
-    .master-name { font-size: 15px; font-weight: 700; color: var(--text); }
-    .master-spec { font-size: 12px; color: var(--muted); margin-top: 3px; }
-    .master-meta { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-    .badge {
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 11px; font-weight: 600;
-    }
-    .badge-phone { background: rgba(46,204,113,0.15); color: var(--green); }
-    .badge-addr { background: rgba(255,255,255,0.06); color: var(--muted); }
-    .call-btn {
-      background: var(--green);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 8px 14px;
-      font-size: 12px; font-weight: 700;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .call-btn:active { transform: scale(0.95); }
+    /* Tip */
+    .tip { background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:12px; padding:12px 14px; font-size:12px; color:var(--muted); margin-top:4px; line-height:1.6; }
+    .tip strong { color:var(--text); }
 
-    /* ── Car Market ── */
-    .car-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      overflow: hidden;
-      transition: all 0.2s;
-    }
-    .car-card:active { transform: scale(0.99); }
-    .car-card-body { padding: 14px 16px; }
-    .car-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-    .car-name { font-size: 16px; font-weight: 700; }
-    .car-year { font-size: 12px; color: var(--muted); }
-    .car-price { font-size: 20px; font-weight: 800; color: var(--gold); margin-top: 4px; }
-    .car-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-    .car-tag {
-      padding: 4px 10px;
-      border-radius: 8px;
-      background: var(--surface2);
-      font-size: 11px; color: var(--muted); font-weight: 500;
-    }
-    .car-action {
-      display: flex;
-      border-top: 1px solid var(--border);
-      padding: 0;
-    }
-    .car-action-btn {
-      flex: 1; padding: 12px;
-      background: none; border: none;
-      color: var(--accent); font-size: 13px; font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .car-action-btn:first-child { border-right: 1px solid var(--border); }
-    .car-action-btn:active { background: rgba(230,57,70,0.1); }
-    .car-verdict {
-      background: rgba(46,204,113,0.08);
-      border-left: 3px solid var(--green);
-      padding: 8px 12px;
-      margin: 10px 0 0;
-      font-size: 12px;
-      color: var(--green);
-      border-radius: 0 8px 8px 0;
-    }
-
-    /* ── Bottom Nav ── */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: rgba(15,15,19,0.95);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      display: flex;
-      padding: 8px 0 max(8px, env(safe-area-inset-bottom));
-      z-index: 100;
-    }
-    .nav-item {
-      flex: 1;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 4px;
-      padding: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--muted);
-      font-size: 10px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .nav-item.active { color: var(--accent); }
-    .nav-item svg { transition: all 0.2s; }
-    .nav-item.active svg { filter: drop-shadow(0 0 4px rgba(230,57,70,0.6)); }
-    .nav-icon { font-size: 22px; line-height: 1; }
-
-    /* ── Tip Box ── */
-    .tip {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
-      line-height: 1.6;
-    }
-    .tip strong { color: var(--text); }
+    /* Bottom Nav */
+    .bottom-nav { position:fixed; bottom:0; left:0; right:0; background:rgba(15,15,19,0.95); backdrop-filter:blur(20px); border-top:1px solid var(--border); display:flex; padding:8px 0 max(8px, env(safe-area-inset-bottom)); z-index:100; }
+    .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px; cursor:pointer; color:var(--muted); font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; transition:all 0.2s; }
+    .nav-item.active { color:var(--accent); }
+    .nav-icon { font-size:22px; line-height:1; }
   </style>
 </head>
 <body>
@@ -327,21 +147,22 @@
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showTab('fuel', this)">⛽️ Топливо</div>
-  <div class="tab" onclick="showTab('masters', this)">🛠 Мастера</div>
-  <div class="tab" onclick="showTab('market', this)">🚘 Авто</div>
+  <div class="tab active" onclick="showTab('fuel',this)">⛽️ Топливо</div>
+  <div class="tab" onclick="showTab('market',this)">🔥 Свежачок</div>
+  <div class="tab" onclick="showTab('masters',this)">🛠 Мастера</div>
 </div>
 
-<!-- ══════════ FUEL ══════════ -->
+<!-- ══ FUEL ══ -->
 <div id="tab-fuel" class="section active">
 
   <div class="fuel-header">
-    <div class="fuel-label">Источник: НАРЭ (anre.md)</div>
-    <div class="fuel-date">📅 21 — 23 марта 2026</div>
+    <div class="fuel-label">Источник: НАРЭ (anre.md) • Авто-обновление</div>
+    <div class="fuel-date" id="fuel-date">Загрузка...</div>
+    <div class="fuel-updated" id="fuel-updated"></div>
   </div>
 
   <div class="fuel-warning">
-    ⚠️ Дизель впервые превысил <strong>29 леев</strong> за литр
+    ⚠️ Дизель превысил отметку <strong>29 MDL</strong> — исторический максимум!
   </div>
 
   <div class="fuel-row">
@@ -351,8 +172,11 @@
       <div class="fuel-desc">Стандартное топливо</div>
     </div>
     <div class="fuel-price">
-      <div class="fuel-price-value up">28,47 ₾</div>
-      <div class="fuel-price-change up">📈 +0,44 лея</div>
+      <div>
+        <span class="fuel-price-value up" id="price-benzin">--,--</span>
+        <span class="fuel-currency"> MDL</span>
+      </div>
+      <div class="fuel-price-change up">📈 Цена растет</div>
     </div>
   </div>
 
@@ -363,8 +187,11 @@
       <div class="fuel-desc">Дизельное топливо</div>
     </div>
     <div class="fuel-price">
-      <div class="fuel-price-value up">29,21 ₾</div>
-      <div class="fuel-price-change up">📈 +0,58 лея</div>
+      <div>
+        <span class="fuel-price-value up" id="price-diesel">--,--</span>
+        <span class="fuel-currency"> MDL</span>
+      </div>
+      <div class="fuel-price-change up">📈 Исторический max</div>
     </div>
   </div>
 
@@ -375,56 +202,200 @@
       <div class="fuel-desc">Сжиженный газ</div>
     </div>
     <div class="fuel-price">
-      <div class="fuel-price-value ok">~14,20 ₾</div>
+      <div>
+        <span class="fuel-price-value ok">~14,20</span>
+        <span class="fuel-currency"> MDL</span>
+      </div>
       <div class="fuel-price-change">Вне регулирования</div>
     </div>
   </div>
 
+  <!-- Tank Calculator with Slider -->
   <div class="tank-calc">
     <div class="tank-calc-title">🧮 Сколько стоит полный бак?</div>
-    <div class="tank-row"><span>Бак 50л × 28,47</span><strong>1 423 лея</strong></div>
-    <div class="tank-row"><span>Бак 60л × 28,47</span><strong>1 708 леев</strong></div>
-    <div class="tank-row"><span>Бак 70л (дизель)</span><strong>2 044 лея</strong></div>
-    <div class="tank-divider"></div>
-    <div class="tank-row"><span>💸 Бак 60л в 2020 (13,40/л)</span><strong style="color:var(--green)">804 лея</strong></div>
-    <div class="tank-total"><span>Переплата за 6 лет:</span><span class="price">+904 лея</span></div>
+
+    <div class="slider-section">
+      <div class="slider-label">
+        <span>Объем бака</span>
+        <span class="slider-value" id="tank-size-label">50 литров</span>
+      </div>
+      <input type="range" class="slider" id="tank-slider" min="20" max="100" value="50" step="5" oninput="updateCalc()">
+    </div>
+
+    <div class="slider-section">
+      <div class="slider-label">
+        <span>Сколько залить</span>
+        <span class="slider-value" id="fill-label">50%</span>
+      </div>
+      <input type="range" class="slider" id="fill-slider" min="10" max="100" value="100" step="10" oninput="updateCalc()">
+    </div>
+
+    <div class="tank-result">
+      <div class="tank-row"><span>Литров заливаем:</span><strong id="calc-liters">50 л</strong></div>
+      <div class="tank-row"><span>Цена за литр (95):</span><strong id="calc-price-per-l">-- MDL</strong></div>
+      <div class="tank-divider"></div>
+      <div class="tank-total"><span>К оплате:</span><span class="price" id="calc-total">-- MDL</span></div>
+      <div class="tank-vs2020">
+        <span>То же самое в 2020 (13,40 MDL)</span>
+        <span class="saving" id="calc-overpay">--</span>
+      </div>
+    </div>
   </div>
 
   <div class="tip" style="margin-top:12px">
-    <strong>Совет:</strong> Цены обновляются ежедневно на сайте НАРЭ. Лучшее время заправляться — сразу после выхода нового прайса (~13:00). Следите за каналом <strong>@soferulmd</strong> — публикуем спойлеры!
+    <strong>Совет:</strong> Цены обновляются каждый день автоматически. Следите за каналом <strong>@soferulmd</strong> — публикуем спойлеры ещё до заправок!
   </div>
 </div>
 
-<!-- ══════════ MASTERS ══════════ -->
+<!-- ══ MARKET / 999 ══ -->
+<div id="tab-market" class="section">
+  <div class="cars-updated">🔥 Свежачок на 999.md • Авто до 10 000€ • Обновляется ежедневно</div>
+
+  <div class="car-card">
+    <div class="car-card-body">
+      <div class="car-card-top">
+        <div>
+          <div class="car-name">Volkswagen Golf VII</div>
+          <div class="car-year">2014 • 172 000 km</div>
+        </div>
+        <div class="car-price">6 500€</div>
+      </div>
+      <div class="car-tags">
+        <span class="car-tag">1.6 TDI</span>
+        <span class="car-tag">Механика</span>
+        <span class="car-tag">Комфорт</span>
+        <span class="car-tag">Буюканы</span>
+      </div>
+      <div class="car-verdict">✅ Копеечный в обслуживании. Одна из лучших машин до 10к€</div>
+    </div>
+    <div class="car-action">
+      <button class="car-action-btn" onclick="openUrl('https://999.md/ro/automobiles')">🔗 Смотреть</button>
+      <button class="car-action-btn" onclick="shareText('VW Golf VII 2014, 1.6TDI, 172к км — 6 500€ на 999.md')">📤 Поделиться</button>
+    </div>
+  </div>
+
+  <div class="car-card">
+    <div class="car-card-body">
+      <div class="car-card-top">
+        <div>
+          <div class="car-name">Toyota Corolla E150</div>
+          <div class="car-year">2011 • 148 000 km</div>
+        </div>
+        <div class="car-price">7 900€</div>
+      </div>
+      <div class="car-tags">
+        <span class="car-tag">1.6 Бензин</span>
+        <span class="car-tag">Автомат</span>
+        <span class="car-tag">Рышкановка</span>
+      </div>
+      <div class="car-verdict">✅ Японская надежность. Пробег реальный, ходовая свежая</div>
+    </div>
+    <div class="car-action">
+      <button class="car-action-btn" onclick="openUrl('https://999.md/ro/automobiles')">🔗 Смотреть</button>
+      <button class="car-action-btn" onclick="shareText('Toyota Corolla 2011, автомат, 148к км — 7 900€ на 999.md')">📤 Поделиться</button>
+    </div>
+  </div>
+
+  <div class="car-card">
+    <div class="car-card-body">
+      <div class="car-card-top">
+        <div>
+          <div class="car-name">Skoda Octavia A7</div>
+          <div class="car-year">2015 • 195 000 km</div>
+        </div>
+        <div class="car-price">8 200€</div>
+      </div>
+      <div class="car-tags">
+        <span class="car-tag">2.0 TDI</span>
+        <span class="car-tag">DSG</span>
+        <span class="car-tag">Ботаника</span>
+      </div>
+      <div class="car-verdict">✅ Расход 5л/100км. Хорош для трассы Кишинев-Яссы</div>
+    </div>
+    <div class="car-action">
+      <button class="car-action-btn" onclick="openUrl('https://999.md/ro/automobiles')">🔗 Смотреть</button>
+      <button class="car-action-btn" onclick="shareText('Skoda Octavia A7 2015, 2.0 TDI, DSG — 8 200€ на 999.md')">📤 Поделиться</button>
+    </div>
+  </div>
+
+  <div class="car-card">
+    <div class="car-card-body">
+      <div class="car-card-top">
+        <div>
+          <div class="car-name">Renault Duster</div>
+          <div class="car-year">2017 • 131 000 km</div>
+        </div>
+        <div class="car-price">7 400€</div>
+      </div>
+      <div class="car-tags">
+        <span class="car-tag">1.5 dCi</span>
+        <span class="car-tag">4x4</span>
+        <span class="car-tag">Механика</span>
+        <span class="car-tag">Центр</span>
+      </div>
+      <div class="car-verdict">✅ Проходимость + экономия. Идеален для дорог Молдовы</div>
+    </div>
+    <div class="car-action">
+      <button class="car-action-btn" onclick="openUrl('https://999.md/ro/automobiles')">🔗 Смотреть</button>
+      <button class="car-action-btn" onclick="shareText('Renault Duster 2017, 4x4, 1.5dCi — 7 400€ на 999.md')">📤 Поделиться</button>
+    </div>
+  </div>
+
+  <div class="car-card">
+    <div class="car-card-body">
+      <div class="car-card-top">
+        <div>
+          <div class="car-name">Nissan Leaf (Электро)</div>
+          <div class="car-year">2017 • SOH 82%</div>
+        </div>
+        <div class="car-price">9 500€</div>
+      </div>
+      <div class="car-tags">
+        <span class="car-tag">40 kWh</span>
+        <span class="car-tag">Автомат</span>
+        <span class="car-tag">~200км/заряд</span>
+      </div>
+      <div class="car-verdict">✅ На ток vs бензин = -70% расходов. Идеал для города</div>
+    </div>
+    <div class="car-action">
+      <button class="car-action-btn" onclick="openUrl('https://999.md/ro/automobiles')">🔗 Смотреть</button>
+      <button class="car-action-btn" onclick="shareText('Nissan Leaf 2017, 40kWh, SOH 82% — 9 500€ на 999.md')">📤 Поделиться</button>
+    </div>
+  </div>
+
+  <div class="tip">
+    Хотите, чтобы мы разобрали конкретный авто с 999.md? Пишите в предложку <strong>@soferulmd</strong>!
+  </div>
+</div>
+
+<!-- ══ MASTERS ══ -->
 <div id="tab-masters" class="section">
   <div class="section-title">👤 Проверенные частники</div>
 
-  <div class="master-card" onclick="callPhone('079471207')">
+  <div class="master-card">
     <div class="master-avatar" style="background:rgba(46,204,113,0.15)">🔌</div>
     <div class="master-info">
       <div class="master-name">Дмитрий</div>
       <div class="master-spec">Кондиционеры, Электрика, Диагностика</div>
-      <div class="master-meta">
-        <span class="badge badge-phone">📞 079 471 207</span>
-      </div>
+      <div class="master-meta"><span class="badge badge-phone">📞 079 471 207</span></div>
     </div>
-    <button class="call-btn">Позвонить</button>
+    <button class="call-btn" onclick="callPhone('079471207')">Позвонить</button>
   </div>
 
-  <div class="master-card" onclick="callPhone('079433008')">
+  <div class="master-card">
     <div class="master-avatar" style="background:rgba(255,107,53,0.15)">🔧</div>
     <div class="master-info">
       <div class="master-name">Мастер Юра</div>
-      <div class="master-spec">Дизельные двигатели, Глубокая диагностика</div>
+      <div class="master-spec">Дизель, Глубокая диагностика</div>
       <div class="master-meta">
         <span class="badge badge-phone">📞 079 433 008</span>
         <span class="badge badge-addr">📍 Хынчешть ш., 142</span>
       </div>
     </div>
-    <button class="call-btn">Позвонить</button>
+    <button class="call-btn" onclick="callPhone('079433008')">Позвонить</button>
   </div>
 
-  <div class="master-card" onclick="callPhone('406640')">
+  <div class="master-card">
     <div class="master-avatar" style="background:rgba(230,57,70,0.15)">🇮🇹</div>
     <div class="master-info">
       <div class="master-name">Денис</div>
@@ -434,10 +405,10 @@
         <span class="badge badge-addr">📍 ул. Соколень, 4</span>
       </div>
     </div>
-    <button class="call-btn">Позвонить</button>
+    <button class="call-btn" onclick="callPhone('406640')">Позвонить</button>
   </div>
 
-  <div class="master-card" onclick="callPhone('069376926')">
+  <div class="master-card">
     <div class="master-avatar" style="background:rgba(52,152,219,0.15)">🔩</div>
     <div class="master-info">
       <div class="master-name">Аурел</div>
@@ -447,12 +418,12 @@
         <span class="badge badge-addr">📍 ул. Пэдурий, 8</span>
       </div>
     </div>
-    <button class="call-btn">Позвонить</button>
+    <button class="call-btn" onclick="callPhone('069376926')">Позвонить</button>
   </div>
 
   <div class="section-title">🏢 Сервисы с рейтингом 4.7+</div>
 
-  <div class="master-card" onclick="callPhone('069893322')">
+  <div class="master-card">
     <div class="master-avatar" style="background:rgba(155,89,182,0.15)">⚡️</div>
     <div class="master-info">
       <div class="master-name">Pogrid Auto</div>
@@ -462,10 +433,10 @@
         <span class="badge badge-addr">📍 Мунчешть ш., 618</span>
       </div>
     </div>
-    <button class="call-btn">Позвонить</button>
+    <button class="call-btn" onclick="callPhone('069893322')">Позвонить</button>
   </div>
 
-  <div class="master-card" onclick="callPhone('079344888')">
+  <div class="master-card">
     <div class="master-avatar" style="background:rgba(230,57,70,0.15)">🏆</div>
     <div class="master-info">
       <div class="master-name">Service Auto Prime</div>
@@ -475,121 +446,74 @@
         <span class="badge badge-addr">📍 ул. Узинелор, 249/1</span>
       </div>
     </div>
-    <button class="call-btn">Позвонить</button>
+    <button class="call-btn" onclick="callPhone('079344888')">Позвонить</button>
   </div>
 
   <div class="tip">
-    <strong>Как не нарваться на развод:</strong><br>
-    1. Называет цену ДО работы? ✅<br>
-    2. Показывает снятые детали? ✅<br>
-    3. У честных мастеров — очередь на запись. Звоните заранее!
+    <strong>Правило:</strong> Честный мастер называет цену ДО работы, показывает снятые детали и у него всегда очередь. Звоните заранее!
   </div>
 </div>
 
-<!-- ══════════ MARKET ══════════ -->
-<div id="tab-market" class="section">
-  <div class="section-title">🔥 Годнота недели с 999.md</div>
-
-  <div class="car-card">
-    <div class="car-card-body">
-      <div class="car-card-top">
-        <div>
-          <div class="car-name">Volkswagen Golf VI</div>
-          <div class="car-year">2011 год • 156 000 км</div>
-        </div>
-        <div class="car-price">4 800 €</div>
-      </div>
-      <div class="car-tags">
-        <span class="car-tag">1.6 TDI</span>
-        <span class="car-tag">Механика</span>
-        <span class="car-tag">Чеканы</span>
-        <span class="car-tag">Частник</span>
-      </div>
-      <div class="car-verdict">✅ Вердикт: Отличный вариант. Запчасти копейки, ремонт везде.</div>
-    </div>
-    <div class="car-action">
-      <button class="car-action-btn" onclick="openUrl('https://999.md')">🔗 На 999.md</button>
-      <button class="car-action-btn">📤 Поделиться</button>
-    </div>
-  </div>
-
-  <div class="car-card">
-    <div class="car-card-body">
-      <div class="car-card-top">
-        <div>
-          <div class="car-name">Renault Megane III</div>
-          <div class="car-year">2012 год • 178 000 км</div>
-        </div>
-        <div class="car-price">4 300 €</div>
-      </div>
-      <div class="car-tags">
-        <span class="car-tag">1.5 dCi</span>
-        <span class="car-tag">Механика</span>
-        <span class="car-tag">Ботаника</span>
-        <span class="car-tag">Частник</span>
-      </div>
-      <div class="car-verdict">✅ Вердикт: Расход по городу 5.5л. Хорош для поездок Кишинев-Яссы.</div>
-    </div>
-    <div class="car-action">
-      <button class="car-action-btn" onclick="openUrl('https://999.md')">🔗 На 999.md</button>
-      <button class="car-action-btn">📤 Поделиться</button>
-    </div>
-  </div>
-
-  <div class="car-card">
-    <div class="car-card-body">
-      <div class="car-card-top">
-        <div>
-          <div class="car-name">Nissan Leaf (Электро)</div>
-          <div class="car-year">2016 год • SOH 80%</div>
-        </div>
-        <div class="car-price">8 900 €</div>
-      </div>
-      <div class="car-tags">
-        <span class="car-tag">Электро</span>
-        <span class="car-tag">Автомат</span>
-        <span class="car-tag">~130км/заряд</span>
-      </div>
-      <div class="car-verdict">✅ Вердикт: Идеален для Кишинева. На ток vs бензин = -70% расходов.</div>
-    </div>
-    <div class="car-action">
-      <button class="car-action-btn" onclick="openUrl('https://999.md')">🔗 На 999.md</button>
-      <button class="car-action-btn">📤 Поделиться</button>
-    </div>
-  </div>
-
-  <div class="tip">
-    <strong>Обновляем каждую неделю!</strong> Хотите, чтобы мы разобрали конкретный авто с 999.md — пишите в предложку канала <strong>@soferulmd</strong>.
-  </div>
-</div>
-
-<!-- ══════════ BOTTOM NAV ══════════ -->
+<!-- Bottom Nav -->
 <div class="bottom-nav">
-  <div class="nav-item active" id="nav-fuel" onclick="showTab('fuel', null, 'nav-fuel')">
-    <div class="nav-icon">⛽️</div>
-    Топливо
+  <div class="nav-item active" id="nav-fuel" onclick="showTab('fuel',null,'nav-fuel')">
+    <div class="nav-icon">⛽️</div>Топливо
   </div>
-  <div class="nav-item" id="nav-masters" onclick="showTab('masters', null, 'nav-masters')">
-    <div class="nav-icon">🛠</div>
-    Мастера
+  <div class="nav-item" id="nav-market" onclick="showTab('market',null,'nav-market')">
+    <div class="nav-icon">🔥</div>Свежачок
   </div>
-  <div class="nav-item" id="nav-market" onclick="showTab('market', null, 'nav-market')">
-    <div class="nav-icon">🚘</div>
-    Авто
+  <div class="nav-item" id="nav-masters" onclick="showTab('masters',null,'nav-masters')">
+    <div class="nav-icon">🛠</div>Мастера
   </div>
 </div>
 
 <script>
-  // Telegram Web App init
   const tg = window.Telegram && window.Telegram.WebApp;
-  if (tg) {
-    tg.ready();
-    tg.expand();
-    document.documentElement.style.setProperty('--tg-theme-bg', tg.themeParams.bg_color || '#0f0f13');
+  if (tg) { tg.ready(); tg.expand(); }
+
+  // ── Fuel prices ──
+  let benzin95Price = 28.47;
+  let dieselPrice = 29.21;
+
+  async function loadPrices() {
+    try {
+      const r = await fetch('prices.json?t=' + Date.now());
+      if (!r.ok) throw new Error('no prices.json');
+      const data = await r.json();
+      benzin95Price = data.benzin95 || 28.47;
+      dieselPrice = data.diesel || 29.21;
+
+      document.getElementById('price-benzin').textContent = benzin95Price.toFixed(2).replace('.', ',');
+      document.getElementById('price-diesel').textContent = dieselPrice.toFixed(2).replace('.', ',');
+      document.getElementById('fuel-date').textContent = '📅 Актуально с ' + (data.valid_from || new Date().toLocaleDateString('ru-RU'));
+      document.getElementById('fuel-updated').textContent = '🔄 Обновлено: ' + (data.updated || '');
+    } catch (e) {
+      document.getElementById('price-benzin').textContent = benzin95Price.toFixed(2).replace('.', ',');
+      document.getElementById('price-diesel').textContent = dieselPrice.toFixed(2).replace('.', ',');
+      document.getElementById('fuel-date').textContent = '📅 21 – 23 марта 2026';
+    }
+    updateCalc();
   }
 
-  const tabMap = { fuel: 'nav-fuel', masters: 'nav-masters', market: 'nav-market' };
+  // ── Slider Calculator ──
+  function updateCalc() {
+    const tankSize = parseInt(document.getElementById('tank-slider').value);
+    const fillPct = parseInt(document.getElementById('fill-slider').value);
+    const liters = Math.round(tankSize * fillPct / 100);
+    const total = liters * benzin95Price;
+    const old = liters * 13.40;
+    const overpay = total - old;
 
+    document.getElementById('tank-size-label').textContent = tankSize + ' литров';
+    document.getElementById('fill-label').textContent = fillPct + '%';
+    document.getElementById('calc-liters').textContent = liters + ' л';
+    document.getElementById('calc-price-per-l').textContent = benzin95Price.toFixed(2).replace('.', ',') + ' MDL';
+    document.getElementById('calc-total').textContent = Math.round(total).toLocaleString('ru') + ' MDL';
+    document.getElementById('calc-overpay').textContent = '+' + Math.round(overpay).toLocaleString('ru') + ' MDL vs 2020';
+  }
+
+  // ── Tabs ──
+  const tabMap = { fuel:'nav-fuel', market:'nav-market', masters:'nav-masters' };
   function showTab(name, tabEl, navId) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -598,11 +522,9 @@
     if (tabEl) tabEl.classList.add('active');
     const nid = navId || tabMap[name];
     if (nid) document.getElementById(nid).classList.add('active');
-    // sync tabs
     if (!tabEl) {
-      const tabs = ['fuel','masters','market'];
-      const idx = tabs.indexOf(name);
-      document.querySelectorAll('.tab')[idx].classList.add('active');
+      const tabs = ['fuel','market','masters'];
+      document.querySelectorAll('.tab')[tabs.indexOf(name)].classList.add('active');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -615,6 +537,14 @@
     if (tg) tg.openLink(url);
     else window.open(url, '_blank');
   }
+
+  function shareText(text) {
+    if (tg) tg.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent('https://t.me/soferulmd') + '&text=' + encodeURIComponent(text));
+    else if (navigator.share) navigator.share({ text });
+  }
+
+  // Init
+  loadPrices();
 </script>
 </body>
 </html>

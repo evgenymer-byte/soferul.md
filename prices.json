@@ -1,8 +1,8 @@
 {
-  "benzin95": 20.05,
-  "diesel": 21.05,
+  "benzin95": 21.05,
+  "diesel": 22.05,
   "gpl": null,
   "fallback": false,
-  "updated": "20.05.2026 13:43 UTC",
-  "valid_from": "20.05.2026"
+  "updated": "21.05.2026 14:15 UTC",
+  "valid_from": "21.05.2026"
 }

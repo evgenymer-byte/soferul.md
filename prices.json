@@ -1,8 +1,8 @@
 {
-  "benzin95": 22.32,
-  "diesel": 23.1,
-  "gpl": null,
-  "fallback": false,
-  "updated": "25.10.2026 14:54 UTC",
-  "valid_from": "25.10.2026"
+  "benzin95": 28.47,
+  "diesel": 29.21,
+  "gpl": 14.2,
+  "fallback": true,
+  "updated": "26.10.2026 17:12 UTC",
+  "valid_from": "26.10.2026"
 }
